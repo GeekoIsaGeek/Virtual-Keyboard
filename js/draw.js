@@ -1,10 +1,10 @@
 (function () {
-  /// Textarea
+  
   const input = document.createElement('textarea')
   input.className = 'textarea'
   document.body.appendChild(input)
 
-  /// keys
+  
   const keys = [
     '`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
     'Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', 'DEL',

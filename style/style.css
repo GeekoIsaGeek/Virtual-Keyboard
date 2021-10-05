@@ -26,7 +26,7 @@ body{
     flex-wrap: wrap;
     justify-self: center;
     width:70vw;
-    border-radius:20px;
+    border-radius:1vw;
     margin-top:5vh;
     background-color: rgb(40 39 39);
     padding: 2.5vw 2vw 2.5vw 2vw;
@@ -43,11 +43,14 @@ body{
     background-color:#3A424E;
     color:white;
     font-family: 'Roboto Mono', monospace;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 .key:hover{
     cursor: pointer;
 }
-.key:active{
+.key:active,.key:nth-child(1):active,.key:nth-child(14):active,.key:nth-child(15):active,.key:nth-child(43):active,.key:nth-child(56):active{
     background-color:darkgray;
     color:black;
     transition: ease-in-out;
@@ -79,4 +82,14 @@ body{
 .key:nth-child(59){
     width: calc(6 * (70vw / 15));
     color:darkgray;
+}
+
+@media only screen and (max-width: 768px){
+    .key{
+        border-radius: 0;
+        border-width: 0.1px;
+    }
+    .textarea{
+        height:15vh;
+    }
 }
