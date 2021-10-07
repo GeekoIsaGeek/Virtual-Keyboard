@@ -59,7 +59,9 @@ const setLayoutLang = (lang) => {
 const setUpperLetters = (lang) => {
   for (let k = 0; k < keysArr.length; k++) {
     if (keysArr[k].innerHTML.length === 1) {
-      if (lang[k].shift !== null) { keysArr[k].innerHTML = lang[k].shift }
+      if (lang[k].shift !== null) { 
+        keysArr[k].innerHTML = lang[k].shift
+      }
     }
   }
 }
