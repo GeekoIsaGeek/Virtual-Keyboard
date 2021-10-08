@@ -280,7 +280,7 @@ const ge = [
     alpha: false
   },
   {
-    key: 'Win',
+    key: 'Super',
     shift: null,
     alpha: false
   },

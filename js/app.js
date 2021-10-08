@@ -15,12 +15,17 @@ const keys = [
   'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', 'DEL',
   'CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", '\\', 'Enter',
   'Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '▲', 'Shift',
-  'Ctrl', 'Win', 'Alt', '', 'Alt', 'Ctrl', '◄', '▼', '►'
+  'Ctrl', 'Super', 'Alt', '', 'Alt', 'Ctrl', '◄', '▼', '►'
 ]
 
 const keyBoard = document.createElement('div')
 keyBoard.className = 'keyboard'
 document.body.appendChild(keyBoard)
+
+const h2 = document.createElement('h2');
+h2.className = "h2";
+h2.innerText = "Click the Super key to change the keyboard layout";
+document.body.appendChild(h2)
 
 keys.forEach((e) => {
   const k = document.createElement('button')
@@ -59,9 +64,7 @@ const setLayoutLang = (lang) => {
 const setUpperLetters = (lang) => {
   for (let k = 0; k < keysArr.length; k++) {
     if (keysArr[k].innerHTML.length === 1) {
-      if (lang[k].shift !== null) { 
-        keysArr[k].innerHTML = lang[k].shift
-      }
+      if (lang[k].shift !== null) { keysArr[k].innerHTML = lang[k].shift }
     }
   }
 }

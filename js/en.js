@@ -280,7 +280,7 @@ const en = [
     alpha: false
   },
   {
-    key: 'Win',
+    key: 'Super',
     shift: null,
     alpha: false
   },
