@@ -16,8 +16,34 @@ document.body.appendChild(keyBoard)
 
 const h2 = document.createElement('h2');
 h2.className = "h2";
-h2.innerText = "Click the Super key to change the keyboard layout";
-document.body.appendChild(h2)
+h2.innerText = "• Click Super key to change the keyboard layout";
+// document.body.appendChild(h2)
+
+const h3 = document.createElement('h3');
+h3.className = "h3";
+h3.innerText = "• Click Shift key and move out the cursor without taking your hand off the mouse button to type symbols and special chars";
+// document.body.appendChild(h3)
+
+const help = document.createElement('div');
+help.className = 'help';
+help.appendChild(h2);
+help.appendChild(h3);
+document.body.appendChild(help);
+
+help.innerHTML += "Designed By GeorgeKVR" 
+
+const helpBtn = document.createElement('button');
+helpBtn.className = "help-button";
+helpBtn.innerText = 'Need Help?';
+document.body.appendChild(helpBtn);
+
+const closeBtn = document.createElement('button');
+closeBtn.className = 'close-button';
+closeBtn.innerText = '✕';
+help.appendChild(closeBtn);
+
+closeBtn.addEventListener('click',()=> help.style.display = "none");
+helpBtn.addEventListener('click',()=> help.style.display = "flex");
 
 en.forEach((e) =>{
   const k = document.createElement('button')
