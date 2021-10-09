@@ -186,7 +186,7 @@ const ge = [
   },
   {
     key: 'ლ',
-    shift: '₾',
+    shift: null,
     alpha: true
   },
   {

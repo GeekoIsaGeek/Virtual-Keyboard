@@ -10,14 +10,6 @@ let isCapsOn = false
 let isWinClicked = false
 let chosenLang = 'en'
 
-const keys = [
-  '`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace',
-  'Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', 'DEL',
-  'CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", '\\', 'Enter',
-  'Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '▲', 'Shift',
-  'Ctrl', 'Super', 'Alt', '', 'Alt', 'Ctrl', '◄', '▼', '►'
-]
-
 const keyBoard = document.createElement('div')
 keyBoard.className = 'keyboard'
 document.body.appendChild(keyBoard)
@@ -27,23 +19,23 @@ h2.className = "h2";
 h2.innerText = "Click the Super key to change the keyboard layout";
 document.body.appendChild(h2)
 
-keys.forEach((e) => {
+en.forEach((e) =>{
   const k = document.createElement('button')
   k.className = 'key'
-  k.innerHTML = en[keys.indexOf(e)].key
+  k.innerHTML = e.key
   keyBoard.appendChild(k)
 })
 
 const keysArr = document.getElementsByClassName('key')
 
-const setLowerCaseKeys = () => {
+const displayLowerCaseLetters = () => {
   for (const key of keysArr) {
     if (chosenLang === 'en') {
       key.innerHTML = key.innerHTML.toLowerCase()
     }
   }
 }
-const setUpperCaseKeys = () => {
+const displayUpperCaseLetters = () => {
   for (const key of keysArr) {
     if (key.innerHTML.length === 1) {
       if (chosenLang === 'en') {
@@ -61,13 +53,16 @@ const setLayoutLang = (lang) => {
   }
 }
 
-const setUpperLetters = (lang) => {
+const displaySymbols = (lang) => {
   for (let k = 0; k < keysArr.length; k++) {
     if (keysArr[k].innerHTML.length === 1) {
-      if (lang[k].shift !== null) { keysArr[k].innerHTML = lang[k].shift }
+      if (lang[k].shift !== null) { 
+        keysArr[k].innerHTML = lang[k].shift 
+      }
     }
   }
 }
+
 //  Spacebar
 keysArr[58].addEventListener('click', () => {
   input.innerHTML += ' '
@@ -86,9 +81,9 @@ keysArr[41].addEventListener('click', () => {
 // L-Shift
 keysArr[42].addEventListener('mousedown', () => {
   if (chosenLang === 'ge') {
-    setUpperLetters(ge)
+    displaySymbols(ge)
   } else {
-    setUpperLetters(en)
+    displaySymbols(en)
   }
 })
 keysArr[42].addEventListener('mouseup', () => {
@@ -102,9 +97,9 @@ keysArr[42].addEventListener('mouseup', () => {
 // R-Shift
 keysArr[54].addEventListener('mousedown', () => {
   if (chosenLang === 'ge') {
-    setUpperLetters(ge)
+    displaySymbols(ge)
   } else if (chosenLang === 'en') {
-    setUpperLetters(en)
+    displaySymbols(en)
   }
 })
 keysArr[54].addEventListener('mouseup', () => {
@@ -132,10 +127,10 @@ keysArr[28].addEventListener('click', () => {
   isCapsOn = !isCapsOn
   if (isCapsOn === true) {
     keysArr[28].style.backgroundColor = 'green'
-    setUpperCaseKeys()
+    displayUpperCaseLetters()
   } else {
     keysArr[28].style.backgroundColor = '#1C232E'
-    setLowerCaseKeys()
+    displayLowerCaseLetters()
   }
 })
 // Backspace
@@ -145,7 +140,7 @@ keysArr[13].addEventListener('click', () => {
   }
 })
 
-// Display text
+// Display chars
 for (const key of keysArr) {
   if (key.innerHTML.length === 1) {
     key.addEventListener('click', () => input.innerHTML += key.innerHTML)
