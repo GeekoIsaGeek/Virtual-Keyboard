@@ -100,6 +100,25 @@ const fooForBackspace = () => {
   }
 };
 
+const onActive = (el) =>{
+  el.style.backgroundColor = 'darkgray';
+  el.style.color = 'black';
+  setTimeout(defColors,200);
+}
+
+const defColors = () =>{
+  en.forEach((el)=> {
+    const e = en.indexOf(el);
+    if(el.shift !== null || el.key === ''){
+      keysArr[e].style.backgroundColor = '#3A424E';
+      keysArr[e].style.color = 'white';
+    } else {
+      keysArr[e].style.backgroundColor = '#1C232E';
+      keysArr[e].style.color = 'darkgray';
+    }
+  })
+}
+
 //  Spacebar
 keysArr[58].addEventListener('click', fooForSpacebar);
 
@@ -128,27 +147,10 @@ keysArr[13].addEventListener('click', fooForBackspace);
 
 // Display chars
 for (const key of keysArr) {
+  key.addEventListener('click', () => {
+    onActive(key);
     if (key.innerHTML.length === 1) {
-        key.addEventListener('click', () => input.innerHTML += key.innerHTML)
-    }
-}
-
-
-const onActive = (el) =>{
-  el.style.backgroundColor = 'darkgray';
-  el.style.color = 'black';
-  setTimeout(defColors,200);
-}
-
-const defColors = () =>{
-  en.forEach((el)=> {
-    const e = en.indexOf(el);
-    if(el.shift !== null || el.key === ''){
-      keysArr[e].style.backgroundColor = '#3A424E';
-      keysArr[e].style.color = 'white';
-    } else {
-      keysArr[e].style.backgroundColor = '#1C232E';
-      keysArr[e].style.color = 'darkgray';
+      input.innerHTML += key.innerHTML;      
     }
   })
 }
@@ -160,31 +162,24 @@ document.onkeydown = function(e){
     const el = keysArr[index];
     if(eObj.keyCode === e.keyCode){
       onActive(keysArr[index]);
-      // Caps
       if(eObj.keyCode === 20){
         fooForCaps();
       }
-      // Enter
       if(eObj.keyCode === 13){
         fooForEnter();
       }
-      // Super
       if(eObj.keyCode === 91){
         fooForSuper();
       }
-      // Spacebar
       if(eObj.keyCode === 32){
         fooForSpacebar();
       }
-      // TAB
       if(eObj.keyCode === 9){
         fooForTab();
       }
-      //Backspace
       if(eObj.keyCode === 8){
         fooForBackspace();
       }
-      // Shift
       if(eObj.keyCode === 16){
         if(isShiftClicked){
           fooForShiftMouseUp();
@@ -194,17 +189,18 @@ document.onkeydown = function(e){
           isShiftClicked = !isShiftClicked;
         }
       }
-      // R-Shift
-      if(eObj.keyCode === 'R16'){
-        // onActive(keysArr[en.indexOf(e)])
-        if(isShiftClicked){
-          fooForShiftMouseUp();
-          isShiftClicked = !isShiftClicked;
-        } else {
-          fooForShiftMouseDown();
-          isShiftClicked = !isShiftClicked;
-        }
-      }
+      // // R-Shift
+      // if(eObj.keyCode === 'R16'){
+      //   // onActive(keysArr[en.indexOf(e)])
+      //   if(isShiftClicked){
+      //     fooForShiftMouseUp();
+      //     isShiftClicked = !isShiftClicked;
+      //   } else {
+      //     fooForShiftMouseDown();
+      //     isShiftClicked = !isShiftClicked;
+      //   }
+      // }
+      
       // for another keys 
       if(el.innerHTML.length === 1 && el.innerHTML !== '▲' && el.innerHTML !== '▼' && el.innerHTML !== '◄' && el.innerHTML !== '►' ){
         input.innerHTML += el.innerHTML;
