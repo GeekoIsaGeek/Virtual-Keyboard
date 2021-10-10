@@ -1,12 +1,16 @@
 /* eslint-disable no-return-assign */
-import { input, keyBoard } from './elements.js'
+import { input, keyBoard, closeBtn, infoBtn } from './elements.js'
+import info from './elements.js'
 import ge from './ge.js'
 import en from './en.js'
 
 let isCapsOn = false
-let isChangeLayoutAsked = false
+let isLayoutChangeAsked = false
 let chosenLang = 'en'
 let isShiftClicked = false
+
+infoBtn.addEventListener('click',()=> info.style.display = 'flex')
+closeBtn.addEventListener('click',()=> info.style.display = 'none')
 
 en.forEach((e) => {
   const k = document.createElement('button')
@@ -73,8 +77,8 @@ const fooForShiftMouseUp = () => {
 }
 
 const fooForSuper = () => {
-  isChangeLayoutAsked = !isChangeLayoutAsked
-  if (isChangeLayoutAsked) {
+  isLayoutChangeAsked = !isLayoutChangeAsked
+  if (isLayoutChangeAsked) {
     setLayoutLang(ge)
     chosenLang = 'ge'
   } else {
@@ -119,30 +123,15 @@ const defColors = () => {
   })
 }
 
-//  Spacebar
 keysArr[58].addEventListener('click', fooForSpacebar)
-
-// Tab
 keysArr[14].addEventListener('click', fooForTab)
-
-// Enter
 keysArr[41].addEventListener('click', fooForEnter)
-
-// L-Shift
-keysArr[42].addEventListener('mousedown', fooForShiftMouseDown)
+keysArr[42].addEventListener('mousedown', fooForShiftMouseDown) //L-Shift
 keysArr[42].addEventListener('mouseup', fooForShiftMouseUp)
-
-// R-Shift
-keysArr[54].addEventListener('mousedown', fooForShiftMouseDown)
+keysArr[54].addEventListener('mousedown', fooForShiftMouseDown) //R-Shift
 keysArr[54].addEventListener('mouseup', fooForShiftMouseUp)
-
-// Super
 keysArr[56].addEventListener('click', fooForSuper)
-
-//  Capslock
 keysArr[28].addEventListener('click', fooForCaps)
-
-// Backspace
 keysArr[13].addEventListener('click', fooForBackspace)
 
 // Display chars
@@ -190,7 +179,7 @@ document.onkeydown = function (e) {
         }
       }
       // for another keys
-      if (el.innerHTML.length === 1 && el.innerHTML !== '▲' && el.innerHTML !== '▼' && el.innerHTML !== '◄' && el.innerHTML !== '►') {
+      if (el.innerHTML.length === 1) {
         input.innerHTML += el.innerHTML
       }
     }
@@ -198,8 +187,8 @@ document.onkeydown = function (e) {
   if (eObj.altKey && eObj.ctrlKey) {
     onActive(keysArr[55])
     onActive(keysArr[57])
-    isChangeLayoutAsked = !isChangeLayoutAsked
-    if (isChangeLayoutAsked) {
+    isLayoutChangeAsked = !isLayoutChangeAsked
+    if (isLayoutChangeAsked) {
       setLayoutLang(ge)
       chosenLang = 'ge'
     } else {
