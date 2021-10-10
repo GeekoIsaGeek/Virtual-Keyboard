@@ -360,14 +360,14 @@ const en = [
     shift: null,
     alpha: false,
     keyCode: 'R18',
-    right:1
+    right: 1
   },
   {
     key: 'Ctrl',
     shift: null,
     alpha: false,
     keyCode: 'R17',
-    right:1
+    right: 1
   },
   {
     key: '◄',
@@ -379,13 +379,13 @@ const en = [
     key: '▼',
     shift: null,
     alpha: false,
-    keyCode:40
+    keyCode: 40
   },
   {
     key: '►',
     shift: null,
     alpha: false,
-    keyCode:39
+    keyCode: 39
   }
 ]
 

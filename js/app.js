@@ -1,14 +1,14 @@
 /* eslint-disable no-return-assign */
-import {input,keyBoard} from './elements.js';
+import { input, keyBoard } from './elements.js'
 import ge from './ge.js'
 import en from './en.js'
 
 let isCapsOn = false
-let isChangeLayoutAsked= false
+let isChangeLayoutAsked = false
 let chosenLang = 'en'
 let isShiftClicked = false
 
-en.forEach((e) =>{
+en.forEach((e) => {
   const k = document.createElement('button')
   k.className = 'key'
   k.innerHTML = e.key
@@ -45,82 +45,82 @@ const setLayoutLang = (lang) => {
 const displaySymbols = (lang) => {
   for (let k = 0; k < keysArr.length; k++) {
     if (keysArr[k].innerHTML.length === 1) {
-      if (lang[k].shift !== null) { 
-        keysArr[k].innerHTML = lang[k].shift 
+      if (lang[k].shift !== null) {
+        keysArr[k].innerHTML = lang[k].shift
       }
     }
   }
 }
 
-const fooForSpacebar = () => input.innerHTML += ' ';
-const fooForTab = () => input.innerHTML += '   ';
-const fooForEnter = () => input.innerHTML += '\n';
+const fooForSpacebar = () => input.innerHTML += ' '
+const fooForTab = () => input.innerHTML += '   '
+const fooForEnter = () => input.innerHTML += '\n'
 
 const fooForShiftMouseDown = () => {
   if (chosenLang === 'ge') {
-      displaySymbols(ge)
+    displaySymbols(ge)
   } else {
-      displaySymbols(en)
+    displaySymbols(en)
   }
-};
+}
 
 const fooForShiftMouseUp = () => {
   if (chosenLang === 'ge') {
-      setLayoutLang(ge)
+    setLayoutLang(ge)
   } else {
-      setLayoutLang(en)
+    setLayoutLang(en)
   }
-};
+}
 
 const fooForSuper = () => {
   isChangeLayoutAsked = !isChangeLayoutAsked
   if (isChangeLayoutAsked) {
-      setLayoutLang(ge)
-      chosenLang = 'ge'
+    setLayoutLang(ge)
+    chosenLang = 'ge'
   } else {
-      setLayoutLang(en)
-      chosenLang = 'en'
+    setLayoutLang(en)
+    chosenLang = 'en'
   }
-};
+}
 
 const fooForCaps = () => {
   isCapsOn = !isCapsOn
   if (isCapsOn === true) {
-      keysArr[28].style.backgroundColor = 'green'
-      displayUpperCaseLetters()
+    keysArr[28].style.backgroundColor = 'green'
+    displayUpperCaseLetters()
   } else {
-      keysArr[28].style.backgroundColor = '#1C232E'
-      displayLowerCaseLetters()
+    keysArr[28].style.backgroundColor = '#1C232E'
+    displayLowerCaseLetters()
   }
-};
+}
 
 const fooForBackspace = () => {
   if (input.innerHTML !== undefined) {
     input.innerHTML = input.innerHTML.slice(0, input.innerHTML.length - 1)
   }
-};
-
-const onActive = (el) =>{
-  el.style.backgroundColor = 'darkgray';
-  el.style.color = 'black';
-  setTimeout(defColors,150);
 }
 
-const defColors = () =>{
-  en.forEach((el)=> {
-    const e = en.indexOf(el);
-    if(el.shift !== null || el.key === ''){
-      keysArr[e].style.backgroundColor = '#3A424E';
-      keysArr[e].style.color = 'white';
-    } else{
-      keysArr[e].style.color = 'darkgray';
-      keysArr[e].style.backgroundColor = '#1C232E';
+const onActive = (el) => {
+  el.style.backgroundColor = 'darkgray'
+  el.style.color = 'black'
+  setTimeout(defColors, 150)
+}
+
+const defColors = () => {
+  en.forEach((el) => {
+    const e = en.indexOf(el)
+    if (el.shift !== null || el.key === '') {
+      keysArr[e].style.backgroundColor = '#3A424E'
+      keysArr[e].style.color = 'white'
+    } else {
+      keysArr[e].style.color = 'darkgray'
+      keysArr[e].style.backgroundColor = '#1C232E'
     }
   })
 }
 
 //  Spacebar
-keysArr[58].addEventListener('click', fooForSpacebar);
+keysArr[58].addEventListener('click', fooForSpacebar)
 
 // Tab
 keysArr[14].addEventListener('click', fooForTab)
@@ -140,65 +140,65 @@ keysArr[54].addEventListener('mouseup', fooForShiftMouseUp)
 keysArr[56].addEventListener('click', fooForSuper)
 
 //  Capslock
-keysArr[28].addEventListener('click', fooForCaps);
+keysArr[28].addEventListener('click', fooForCaps)
 
 // Backspace
-keysArr[13].addEventListener('click', fooForBackspace);
+keysArr[13].addEventListener('click', fooForBackspace)
 
 // Display chars
 for (const key of keysArr) {
   key.addEventListener('click', () => {
-    onActive(key);
+    onActive(key)
     if (key.innerHTML.length === 1) {
-      input.innerHTML += key.innerHTML;      
+      input.innerHTML += key.innerHTML
     }
   })
 }
 
-document.onkeydown = function(e){ 
-  let eObj = window.event? event : e
-  en.forEach((e)=>{
-    const index = en.indexOf(e);
-    const el = keysArr[index];
-    if(eObj.keyCode === e.keyCode){
-      onActive(keysArr[index]);
-      if(eObj.keyCode === 20){
-        fooForCaps();
+document.onkeydown = function (e) {
+  const eObj = window.event ? event : e
+  en.forEach((e) => {
+    const index = en.indexOf(e)
+    const el = keysArr[index]
+    if (eObj.keyCode === e.keyCode) {
+      onActive(keysArr[index])
+      if (eObj.keyCode === 20) {
+        fooForCaps()
       }
-      if(eObj.keyCode === 13){
-        fooForEnter();
+      if (eObj.keyCode === 13) {
+        fooForEnter()
       }
-      if(eObj.keyCode === 91){
-        fooForSuper();
+      if (eObj.keyCode === 91) {
+        fooForSuper()
       }
-      if(eObj.keyCode === 32){
-        fooForSpacebar();
+      if (eObj.keyCode === 32) {
+        fooForSpacebar()
       }
-      if(eObj.keyCode === 9){
-        fooForTab();
+      if (eObj.keyCode === 9) {
+        fooForTab()
       }
-      if(eObj.keyCode === 8){
-        fooForBackspace();
+      if (eObj.keyCode === 8) {
+        fooForBackspace()
       }
-      if(eObj.keyCode === 16){
-        if(isShiftClicked){
-          fooForShiftMouseUp();
-          isShiftClicked = !isShiftClicked;
+      if (eObj.keyCode === 16) {
+        if (isShiftClicked) {
+          fooForShiftMouseUp()
+          isShiftClicked = !isShiftClicked
         } else {
-          fooForShiftMouseDown();
-          isShiftClicked = !isShiftClicked;
+          fooForShiftMouseDown()
+          isShiftClicked = !isShiftClicked
         }
       }
-      // for another keys 
-      if(el.innerHTML.length === 1 && el.innerHTML !== '▲' && el.innerHTML !== '▼' && el.innerHTML !== '◄' && el.innerHTML !== '►' ){
-        input.innerHTML += el.innerHTML;
+      // for another keys
+      if (el.innerHTML.length === 1 && el.innerHTML !== '▲' && el.innerHTML !== '▼' && el.innerHTML !== '◄' && el.innerHTML !== '►') {
+        input.innerHTML += el.innerHTML
       }
     }
   })
-  if(eObj.altKey && eObj.ctrlKey){
-    onActive(keysArr[55]);
-    onActive(keysArr[57]);
-    isChangeLayoutAsked= !isChangeLayoutAsked
+  if (eObj.altKey && eObj.ctrlKey) {
+    onActive(keysArr[55])
+    onActive(keysArr[57])
+    isChangeLayoutAsked = !isChangeLayoutAsked
     if (isChangeLayoutAsked) {
       setLayoutLang(ge)
       chosenLang = 'ge'
