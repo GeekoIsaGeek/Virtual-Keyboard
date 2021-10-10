@@ -96,14 +96,14 @@ const fooForCaps = () => {
 
 const fooForBackspace = () => {
   if (input.innerHTML !== undefined) {
-      input.innerHTML = input.innerHTML.slice(0, input.innerHTML.length - 1)
+    input.innerHTML = input.innerHTML.slice(0, input.innerHTML.length - 1)
   }
 };
 
 const onActive = (el) =>{
   el.style.backgroundColor = 'darkgray';
   el.style.color = 'black';
-  setTimeout(defColors,200);
+  setTimeout(defColors,150);
 }
 
 const defColors = () =>{
@@ -112,9 +112,9 @@ const defColors = () =>{
     if(el.shift !== null || el.key === ''){
       keysArr[e].style.backgroundColor = '#3A424E';
       keysArr[e].style.color = 'white';
-    } else {
-      keysArr[e].style.backgroundColor = '#1C232E';
+    } else{
       keysArr[e].style.color = 'darkgray';
+      keysArr[e].style.backgroundColor = '#1C232E';
     }
   })
 }
@@ -160,7 +160,7 @@ document.onkeydown = function(e){
   en.forEach((e)=>{
     const index = en.indexOf(e);
     const el = keysArr[index];
-    if(eObj.keyCode === e.keyCodee){
+    if(eObj.keyCode === e.keyCode){
       onActive(keysArr[index]);
       if(eObj.keyCode === 20){
         fooForCaps();
