@@ -1,28 +1,11 @@
 /* eslint-disable no-return-assign */
+import {input,keyBoard} from './elements.js';
 import ge from './ge.js'
 import en from './en.js'
-
-const input = document.createElement('textarea')
-input.className = 'textarea'
-document.body.appendChild(input)
 
 let isCapsOn = false
 let isChangeLayoutAsked= false
 let chosenLang = 'en'
-
-const keyBoard = document.createElement('div')
-keyBoard.className = 'keyboard'
-document.body.appendChild(keyBoard)
-
-const note1 = document.createElement('h2');
-note1.className = "note1";
-note1.innerText = "• Click Super key or use Ctrl + Alt combination on physical keyboard(ikr) to change the keyboard layout";
-document.body.appendChild(note1)
-
-const note2 = document.createElement('h2');
-note2.className = "note2";
-note2.innerText = "• Click Shift key and move out the cursor without taking your hand off the mouse button to type symbols and special chars";
-document.body.appendChild(note2)
 
 en.forEach((e) =>{
   const k = document.createElement('button')
@@ -68,90 +51,6 @@ const displaySymbols = (lang) => {
   }
 }
 
-//  Spacebar
-keysArr[58].addEventListener('click', () => {
-  input.innerHTML += ' '
-})
-
-// Tab
-keysArr[14].addEventListener('click', () => {
-  input.innerHTML += '   '
-})
-
-// Enter
-keysArr[41].addEventListener('click', () => {
-  input.innerHTML += '\n'
-})
-
-// L-Shift
-keysArr[42].addEventListener('mousedown', () => {
-  if (chosenLang === 'ge') {
-    displaySymbols(ge)
-  } else {
-    displaySymbols(en)
-  }
-})
-keysArr[42].addEventListener('mouseup', () => {
-  if (chosenLang === 'ge') {
-    setLayoutLang(ge)
-  } else {
-    setLayoutLang(en)
-  }
-})
-
-// R-Shift
-keysArr[54].addEventListener('mousedown', () => {
-  if (chosenLang === 'ge') {
-    displaySymbols(ge)
-  } else if (chosenLang === 'en') {
-    displaySymbols(en)
-  }
-})
-keysArr[54].addEventListener('mouseup', () => {
-  if (chosenLang === 'ge') {
-    setLayoutLang(ge)
-  } else if (chosenLang === 'en') {
-    setLayoutLang(en)
-  }
-})
-
-// Super
-keysArr[56].addEventListener('click', () => {
-  isChangeLayoutAsked = !isChangeLayoutAsked
-  if (isChangeLayoutAsked) {
-    setLayoutLang(ge)
-    chosenLang = 'ge'
-  } else {
-    setLayoutLang(en)
-    chosenLang = 'en'
-  }
-})
-
-//  Capslock
-keysArr[28].addEventListener('click', () => {
-  isCapsOn = !isCapsOn
-  if (isCapsOn === true) {
-    keysArr[28].style.backgroundColor = 'green'
-    displayUpperCaseLetters()
-  } else {
-    keysArr[28].style.backgroundColor = '#1C232E'
-    displayLowerCaseLetters()
-  }
-})
-// Backspace
-keysArr[13].addEventListener('click', () => {
-  if (input.innerHTML !== undefined) {
-    input.innerHTML = input.innerHTML.slice(0, input.innerHTML.length - 1)
-  }
-})
-
-// Display chars
-for (const key of keysArr) {
-  if (key.innerHTML.length === 1) {
-    key.addEventListener('click', () => input.innerHTML += key.innerHTML)
-  }
-}
-
 const onActive = (el) =>{
   el.style.backgroundColor = 'darkgray';
   el.style.color = 'black';
@@ -171,6 +70,83 @@ const defColors = () =>{
   })
 }
 
+//  Spacebar
+keysArr[58].addEventListener('click', () => input.innerHTML += ' ')
+
+// Tab
+keysArr[14].addEventListener('click', () => input.innerHTML += '   ')
+
+// Enter
+keysArr[41].addEventListener('click', () => input.innerHTML += '\n')
+
+// L-Shift
+keysArr[42].addEventListener('mousedown', () => {
+    if (chosenLang === 'ge') {
+        displaySymbols(ge)
+    } else {
+        displaySymbols(en)
+    }
+})
+keysArr[42].addEventListener('mouseup', () => {
+    if (chosenLang === 'ge') {
+        setLayoutLang(ge)
+    } else {
+        setLayoutLang(en)
+    }
+})
+
+// R-Shift
+keysArr[54].addEventListener('mousedown', () => {
+    if (chosenLang === 'ge') {
+        displaySymbols(ge)
+    } else if (chosenLang === 'en') {
+        displaySymbols(en)
+    }
+})
+keysArr[54].addEventListener('mouseup', () => {
+    if (chosenLang === 'ge') {
+        setLayoutLang(ge)
+    } else if (chosenLang === 'en') {
+        setLayoutLang(en)
+    }
+})
+
+// Super
+keysArr[56].addEventListener('click', () => {
+    isChangeLayoutAsked = !isChangeLayoutAsked
+    if (isChangeLayoutAsked) {
+        setLayoutLang(ge)
+        chosenLang = 'ge'
+    } else {
+        setLayoutLang(en)
+        chosenLang = 'en'
+    }
+})
+
+//  Capslock
+keysArr[28].addEventListener('click', () => {
+    isCapsOn = !isCapsOn
+    if (isCapsOn === true) {
+        keysArr[28].style.backgroundColor = 'green'
+        displayUpperCaseLetters()
+    } else {
+        keysArr[28].style.backgroundColor = '#1C232E'
+        displayLowerCaseLetters()
+    }
+})
+// Backspace
+keysArr[13].addEventListener('click', () => {
+    if (input.innerHTML !== undefined) {
+        input.innerHTML = input.innerHTML.slice(0, input.innerHTML.length - 1)
+    }
+})
+
+// Display chars
+for (const key of keysArr) {
+    if (key.innerHTML.length === 1) {
+        key.addEventListener('click', () => input.innerHTML += key.innerHTML)
+    }
+}
 
 document.onkeydown = function(e){ 
   var eObj = window.event? event : e
