@@ -1,46 +1,12 @@
 /* eslint-disable no-return-assign */
+import {input,keyBoard,closeBtn,helpBtn} from './elements.js'
+import help from './elements.js'
 import ge from './ge.js'
 import en from './en.js'
-
-const input = document.createElement('textarea')
-input.className = 'textarea'
-document.body.appendChild(input)
 
 let isCapsOn = false
 let isWinClicked = false
 let chosenLang = 'en'
-
-const keyBoard = document.createElement('div')
-keyBoard.className = 'keyboard'
-document.body.appendChild(keyBoard)
-
-const h2 = document.createElement('h2');
-h2.className = "h2";
-h2.innerText = "• Click Super key to change the keyboard layout";
-// document.body.appendChild(h2)
-
-const h3 = document.createElement('h3');
-h3.className = "h3";
-h3.innerText = "• Click Shift key and move out the cursor without taking your hand off the mouse button to type symbols and special chars";
-// document.body.appendChild(h3)
-
-const help = document.createElement('div');
-help.className = 'help';
-help.appendChild(h2);
-help.appendChild(h3);
-document.body.appendChild(help);
-
-help.innerHTML += "Designed By GeorgeKVR" 
-
-const helpBtn = document.createElement('button');
-helpBtn.className = "help-button";
-helpBtn.innerText = 'Need Help?';
-document.body.appendChild(helpBtn);
-
-const closeBtn = document.createElement('button');
-closeBtn.className = 'close-button';
-closeBtn.innerText = '✕';
-help.appendChild(closeBtn);
 
 closeBtn.addEventListener('click',()=> help.style.display = "none");
 helpBtn.addEventListener('click',()=> help.style.display = "flex");
@@ -56,7 +22,7 @@ const keysArr = document.getElementsByClassName('key')
 
 const displayLowerCaseLetters = () => {
   for (const key of keysArr) {
-    if (chosenLang === 'en') {
+    if (chosenLang === 'en' && key.innerHTML.length === 1) {
       key.innerHTML = key.innerHTML.toLowerCase()
     }
   }
