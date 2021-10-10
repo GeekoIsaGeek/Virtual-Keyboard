@@ -160,7 +160,7 @@ document.onkeydown = function(e){
   en.forEach((e)=>{
     const index = en.indexOf(e);
     const el = keysArr[index];
-    if(eObj.keyCode === e.keyCode){
+    if(eObj.keyCode === e.keyCodee){
       onActive(keysArr[index]);
       if(eObj.keyCode === 20){
         fooForCaps();
@@ -189,18 +189,6 @@ document.onkeydown = function(e){
           isShiftClicked = !isShiftClicked;
         }
       }
-      // // R-Shift
-      // if(eObj.keyCode === 'R16'){
-      //   // onActive(keysArr[en.indexOf(e)])
-      //   if(isShiftClicked){
-      //     fooForShiftMouseUp();
-      //     isShiftClicked = !isShiftClicked;
-      //   } else {
-      //     fooForShiftMouseDown();
-      //     isShiftClicked = !isShiftClicked;
-      //   }
-      // }
-      
       // for another keys 
       if(el.innerHTML.length === 1 && el.innerHTML !== '▲' && el.innerHTML !== '▼' && el.innerHTML !== '◄' && el.innerHTML !== '►' ){
         input.innerHTML += el.innerHTML;
