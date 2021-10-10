@@ -27,11 +27,10 @@ h2{
     color:white;
     text-shadow:1px 1px black;
     font-size:16px;
-    max-width:60vw;
+    max-width:70vw;
+    text-align: center;
 }
 .note2{
-
-    text-align: center;
     margin-top:-10px;
 }
 .keyboard{
@@ -62,11 +61,14 @@ h2{
 }
 .key:hover{
     cursor: pointer;
+    background-color: gray;
+    color:black;
+    transition:.5s;
 }
-.key:active,.key:nth-child(1):active,.key:nth-child(14):active,.key:nth-child(15):active,.key:nth-child(43):active,.key:nth-child(56):active{
+.key:hover,.key:nth-child(1):hover,.key:nth-child(14):hover,.key:nth-child(15):hover,.key:nth-child(43):hover,.key:nth-child(56):hover{
     background-color:darkgray;
     color:black;
-    transition: ease-in-out;
+    transition: .5s;
 }
 .key:nth-child(14),:nth-child(29){
     width: calc(1.5 * (70vw / 15));

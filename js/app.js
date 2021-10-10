@@ -7,7 +7,7 @@ input.className = 'textarea'
 document.body.appendChild(input)
 
 let isCapsOn = false
-let isWinClicked = false
+let isChangeLayoutAsked= false
 let chosenLang = 'en'
 
 const keyBoard = document.createElement('div')
@@ -16,7 +16,7 @@ document.body.appendChild(keyBoard)
 
 const note1 = document.createElement('h2');
 note1.className = "note1";
-note1.innerText = "• Click Super key to change the keyboard layout";
+note1.innerText = "• Click Super key or use Ctrl + Alt combination on physical keyboard(ikr) to change the keyboard layout";
 document.body.appendChild(note1)
 
 const note2 = document.createElement('h2');
@@ -115,10 +115,10 @@ keysArr[54].addEventListener('mouseup', () => {
   }
 })
 
-// Win
+// Super
 keysArr[56].addEventListener('click', () => {
-  isWinClicked = !isWinClicked
-  if (isWinClicked) {
+  isChangeLayoutAsked = !isChangeLayoutAsked
+  if (isChangeLayoutAsked) {
     setLayoutLang(ge)
     chosenLang = 'ge'
   } else {
@@ -149,5 +149,41 @@ keysArr[13].addEventListener('click', () => {
 for (const key of keysArr) {
   if (key.innerHTML.length === 1) {
     key.addEventListener('click', () => input.innerHTML += key.innerHTML)
+  }
+}
+
+const onActive = (el) =>{
+  el.style.backgroundColor = 'darkgray';
+  el.style.color = 'black';
+  setTimeout(defColors,200);
+}
+
+const defColors = () =>{
+  en.forEach((el)=> {
+    const e = en.indexOf(el);
+    if(el.shift !== null || el.key === ''){
+      keysArr[e].style.backgroundColor = '#3A424E';
+      keysArr[e].style.color = 'white';
+    } else {
+      keysArr[e].style.backgroundColor = '#1C232E';
+      keysArr[e].style.color = 'darkgray';
+    }
+  })
+}
+
+
+document.onkeydown = function(e){ 
+  var eObj = window.event? event : e
+  if(eObj.altKey && eObj.ctrlKey){
+    onActive(keysArr[55]);
+    onActive(keysArr[57]);
+    isChangeLayoutAsked= !isChangeLayoutAsked
+    if (isChangeLayoutAsked) {
+      setLayoutLang(ge)
+      chosenLang = 'ge'
+    } else {
+      setLayoutLang(en)
+      chosenLang = 'en'
+    }
   }
 }
