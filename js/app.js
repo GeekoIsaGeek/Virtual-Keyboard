@@ -7,9 +7,27 @@ let isCapsOn = false
 let isLayoutChangeAsked = false
 let chosenLang = 'en'
 let isShiftClicked = false
+let lang
+
+document.addEventListener('DOMContentLoaded', function(){
+  if(localStorage.getItem('language') === null){
+    localStorage.setItem('language',JSON.stringify(en));
+  } else {
+    const lSCharsArr = JSON.parse(localStorage.getItem('language'));
+    lSCharsArr.forEach((e) =>{
+      keysArr[lSCharsArr.indexOf(e)].innerHTML = e.key;
+    })
+  }
+});
 
 infoBtn.addEventListener('click', () => info.style.display = 'flex')
 closeBtn.addEventListener('click', () => info.style.display = 'none')
+
+
+const setItems = ()=>{
+  chosenLang === 'en' ? lang = en : lang = ge
+  localStorage.setItem('language',JSON.stringify(lang));
+}
 
 en.forEach((e) => {
   const k = document.createElement('button')
@@ -194,5 +212,6 @@ document.onkeydown = function (e) {
       setLayoutLang(en)
       chosenLang = 'en'
     }
+   setItems();
   }
 }
