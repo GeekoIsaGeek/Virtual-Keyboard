@@ -1,6 +1,5 @@
 /* eslint-disable no-return-assign */
-import {input,keyBoard,closeBtn,helpBtn} from './elements.js'
-import help from './elements.js'
+import help, { input, keyBoard, closeBtn, helpBtn } from './elements.js'
 import ge from './ge.js'
 import en from './en.js'
 
@@ -8,10 +7,10 @@ let isCapsOn = false
 let isWinClicked = false
 let chosenLang = 'en'
 
-closeBtn.addEventListener('click',()=> help.style.display = "none");
-helpBtn.addEventListener('click',()=> help.style.display = "flex");
+closeBtn.addEventListener('click', () => help.style.display = 'none')
+helpBtn.addEventListener('click', () => help.style.display = 'flex')
 
-en.forEach((e) =>{
+en.forEach((e) => {
   const k = document.createElement('button')
   k.className = 'key'
   k.innerHTML = e.key
@@ -48,8 +47,8 @@ const setLayoutLang = (lang) => {
 const displaySymbols = (lang) => {
   for (let k = 0; k < keysArr.length; k++) {
     if (keysArr[k].innerHTML.length === 1) {
-      if (lang[k].shift !== null) { 
-        keysArr[k].innerHTML = lang[k].shift 
+      if (lang[k].shift !== null) {
+        keysArr[k].innerHTML = lang[k].shift
       }
     }
   }
