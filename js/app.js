@@ -147,9 +147,12 @@ keysArr[42].addEventListener('mousedown', fooForShiftMouseDown) // L-Shift
 keysArr[42].addEventListener('mouseup', fooForShiftMouseUp)
 keysArr[54].addEventListener('mousedown', fooForShiftMouseDown) // R-Shift
 keysArr[54].addEventListener('mouseup', fooForShiftMouseUp)
-keysArr[56].addEventListener('click', fooForSuper)
 keysArr[28].addEventListener('click', fooForCaps)
 keysArr[13].addEventListener('click', fooForBackspace)
+keysArr[56].addEventListener('click', () => {
+  fooForSuper()
+  setItems()
+})
 
 // Display chars
 for (const key of keysArr) {
@@ -176,6 +179,7 @@ document.onkeydown = function (e) {
       }
       if (eObj.keyCode === 91) {
         fooForSuper()
+        setItems()
       }
       if (eObj.keyCode === 32) {
         fooForSpacebar()
@@ -212,6 +216,6 @@ document.onkeydown = function (e) {
       setLayoutLang(en)
       chosenLang = 'en'
     }
-   setItems();
+    setItems();
   }
 }
