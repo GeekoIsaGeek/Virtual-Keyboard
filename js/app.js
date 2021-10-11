@@ -1,6 +1,5 @@
 /* eslint-disable no-return-assign */
-import { input, keyBoard, closeBtn, infoBtn } from './elements.js'
-import info from './elements.js'
+import info, { input, keyBoard, closeBtn, infoBtn } from './elements.js'
 import ge from './ge.js'
 import en from './en.js'
 
@@ -9,8 +8,8 @@ let isLayoutChangeAsked = false
 let chosenLang = 'en'
 let isShiftClicked = false
 
-infoBtn.addEventListener('click',()=> info.style.display = 'flex')
-closeBtn.addEventListener('click',()=> info.style.display = 'none')
+infoBtn.addEventListener('click', () => info.style.display = 'flex')
+closeBtn.addEventListener('click', () => info.style.display = 'none')
 
 en.forEach((e) => {
   const k = document.createElement('button')
@@ -126,9 +125,9 @@ const defColors = () => {
 keysArr[58].addEventListener('click', fooForSpacebar)
 keysArr[14].addEventListener('click', fooForTab)
 keysArr[41].addEventListener('click', fooForEnter)
-keysArr[42].addEventListener('mousedown', fooForShiftMouseDown) //L-Shift
+keysArr[42].addEventListener('mousedown', fooForShiftMouseDown) // L-Shift
 keysArr[42].addEventListener('mouseup', fooForShiftMouseUp)
-keysArr[54].addEventListener('mousedown', fooForShiftMouseDown) //R-Shift
+keysArr[54].addEventListener('mousedown', fooForShiftMouseDown) // R-Shift
 keysArr[54].addEventListener('mouseup', fooForShiftMouseUp)
 keysArr[56].addEventListener('click', fooForSuper)
 keysArr[28].addEventListener('click', fooForCaps)
