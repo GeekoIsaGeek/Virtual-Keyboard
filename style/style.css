@@ -132,7 +132,7 @@ h2{
     background-color: #1C232E;
     color:darkgray;
 }
-.key:nth-child(1),:nth-child(28),:nth-child(42),:nth-child(57),:nth-child(58),:nth-child(60),:nth-child(55),:nth-child(54),:nth-child(62),:nth-child(63),:nth-child(64){
+.key:nth-child(28),:nth-child(42),:nth-child(57),:nth-child(58),:nth-child(60),:nth-child(55),:nth-child(54),:nth-child(62),:nth-child(63),:nth-child(64){
     background-color: #1C232E;
     color:darkgray;
 }
