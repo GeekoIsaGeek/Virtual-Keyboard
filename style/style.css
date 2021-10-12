@@ -150,14 +150,52 @@ h2{
     .key{
         border-radius: 0;
         border-width: 0.1px;
+        font-size:1.8vw;
+        width: calc(95vw / 15);
+        height:calc(95vw / 25);
+        margin:0;
+    }
+    .textarea{
+        height:25vh !important;
+        margin-top:15vh;
+    }
+    .info{
+        height:100vh;
+        width:100vw;
+        margin:0;
+        padding:0;
+        align-items: center;
+    }
+    h2{
+        max-width:80vw;
+    }
+    .info-button{
+        font-size:12px;
+        padding:5px 10px;
+        margin-top:5vh;
+    }
+    .key:nth-child(14),:nth-child(29){
+        font-size:1.3vw;
+    }
+    .key:nth-child(29){
+        width: calc(1.28 * (81vw / 15));
+    }
+    .key:nth-child(43){
+        width: calc(2.5 * (79vw / 15));
+    }
+    .key:nth-child(55){
+        width: calc(1.28 * (75vw / 15));
+    }
+    .key:nth-child(59){
+        width: calc(6 * (90vw / 15));
+    }
+    .key:nth-child(56),:nth-child(57){
+        width: calc(1.28 * (89vw / 15));
     }
     .textarea{
         height:15vh;
     }
-    /* .h1{
-        font-size:1em;
+    .keyboard{
+        width:90vw;
     }
-    .h2{
-        font-size:.8em;
-    } */
 }
