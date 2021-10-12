@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function(){
 infoBtn.addEventListener('click', () => info.style.display = 'flex')
 closeBtn.addEventListener('click', () => info.style.display = 'none')
 
-
 const setItems = ()=>{
   let lang
   chosenLang === 'en' ? lang = en : lang = ge
