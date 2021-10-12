@@ -7,7 +7,6 @@ let isCapsOn = false
 let isLayoutChangeAsked = false
 let chosenLang = 'en'
 let isShiftClicked = false
-let lang
 
 document.addEventListener('DOMContentLoaded', function(){
   if(localStorage.getItem('language') === null){
@@ -25,6 +24,7 @@ closeBtn.addEventListener('click', () => info.style.display = 'none')
 
 
 const setItems = ()=>{
+  let lang
   chosenLang === 'en' ? lang = en : lang = ge
   localStorage.setItem('language',JSON.stringify(lang));
 }
@@ -76,6 +76,12 @@ const displaySymbols = (lang) => {
 const fooForSpacebar = () => input.innerHTML += ' '
 const fooForTab = () => input.innerHTML += '   '
 const fooForEnter = () => input.innerHTML += '\n'
+
+const fooForDel = () =>{
+  if(input.innerHTML !== undefined){
+    input.innerHTML = ''
+  }
+}
 
 const fooForShiftMouseDown = () => {
   if (chosenLang === 'ge') {
@@ -149,6 +155,7 @@ keysArr[54].addEventListener('mousedown', fooForShiftMouseDown) // R-Shift
 keysArr[54].addEventListener('mouseup', fooForShiftMouseUp)
 keysArr[28].addEventListener('click', fooForCaps)
 keysArr[13].addEventListener('click', fooForBackspace)
+keysArr[27].addEventListener('click', fooForDel)
 keysArr[56].addEventListener('click', () => {
   fooForSuper()
   setItems()
@@ -187,7 +194,7 @@ document.onkeydown = function (e) {
       if (eObj.keyCode === 9) {
         fooForTab()
       }
-      if (eObj.keyCode === 8) {
+      if(eObj.keyCode === 8){
         fooForBackspace()
       }
       if (eObj.keyCode === 16) {
