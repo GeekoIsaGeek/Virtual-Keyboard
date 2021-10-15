@@ -23,24 +23,21 @@ body{
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }
 
-h3,h2{
-    color:yellow;
-    font-size:1.1em;
+.notes{
+    color:cornsilk;
+    font-size:18px;
     font-family: 'Roboto Mono';
-    text-align: center;
     text-shadow:1px 1px black;
-    max-width:50vw;
+    margin:0;
+    padding:5px;
+    max-width:55%;
 }
-h2{
-    font-size:1.2em;
-    margin-bottom: -10px;
-}
+
 .help{
-    width:80vw;
-    height:50vh;
-    background-color: blue;
+    width:95vw;
+    height:95vh;
+    background-color:  #4a4a4a;
     display:flex;
-    position:relative;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -49,7 +46,6 @@ h2{
     text-shadow:1px 1px black;
     font-size:16px;
     position:absolute;
-    top:25vh;
     border-radius:5px;
     font-family: 'Roboto Mono';
     display: none;
@@ -142,8 +138,39 @@ h2{
     .key{
         border-radius: 0;
         border-width: 0.1px;
+        font-size:1.8vw;
+        width: calc(95vw / 15);
+        height:calc(95vw / 25);
+        margin:0;
     }
     .textarea{
-        height:15vh;
+        height:20vh !important;
+        margin-top:15vh;
+    }
+    .key:nth-child(14),:nth-child(29){
+        font-size:1.3vw;
+    }
+    .key:nth-child(29){
+        width: calc(1.28 * (81vw / 15));
+    }
+    .key:nth-child(43){
+        width: calc(2.5 * (79vw / 15));
+    }
+    .key:nth-child(55){
+        width: calc(1.28 * (75vw / 15));
+    }
+    .key:nth-child(59){
+        width: calc(6 * (90vw / 15));
+    }
+    .key:nth-child(56),:nth-child(57){
+        width: calc(1.28 * (89vw / 15));
+    }
+    .keyboard{
+        width:90vw;
+    }
+    .help-button{
+        font-size:12px;
+        padding:5px 10px;
+        margin-top:5vh;
     }
 }

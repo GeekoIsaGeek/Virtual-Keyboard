@@ -64,6 +64,10 @@ keysArr[14].addEventListener('click', () => {
   input.innerHTML += '   '
 })
 
+// Del
+keysArr[27].addEventListener('click', () => {
+  input.innerHTML = ''
+})
 // Enter
 keysArr[41].addEventListener('click', () => {
   input.innerHTML += '\n'
@@ -133,7 +137,8 @@ keysArr[13].addEventListener('click', () => {
 
 // Display chars
 for (const key of keysArr) {
-  if (key.innerHTML.length === 1) {
+  const char = key.innerHTML
+  if (key.innerHTML.length === 1 && char !== '▼' && char !== '◄' && char !== '►' && char !== '▲') {
     key.addEventListener('click', () => input.innerHTML += key.innerHTML)
   }
 }
