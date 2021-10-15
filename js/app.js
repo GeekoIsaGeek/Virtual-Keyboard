@@ -1,13 +1,34 @@
 /* eslint-disable no-return-assign */
-import {input,keyBoard} from './elements.js';
+import info, { input, keyBoard, closeBtn, infoBtn } from './elements.js'
 import ge from './ge.js'
 import en from './en.js'
 
 let isCapsOn = false
-let isChangeLayoutAsked= false
+let isLayoutChangeAsked = false
 let chosenLang = 'en'
+let isShiftClicked = false
 
-en.forEach((e) =>{
+document.addEventListener('DOMContentLoaded', function(){
+  if(localStorage.getItem('language') === null){
+    localStorage.setItem('language',JSON.stringify(en));
+  } else {
+    const lSCharsArr = JSON.parse(localStorage.getItem('language'));
+    lSCharsArr.forEach((e) =>{
+      keysArr[lSCharsArr.indexOf(e)].innerHTML = e.key;
+    })
+  }
+});
+
+infoBtn.addEventListener('click', () => info.style.display = 'flex')
+closeBtn.addEventListener('click', () => info.style.display = 'none')
+
+const setItems = ()=>{
+  let lang
+  chosenLang === 'en' ? lang = en : lang = ge
+  localStorage.setItem('language',JSON.stringify(lang));
+}
+
+en.forEach((e) => {
   const k = document.createElement('button')
   k.className = 'key'
   k.innerHTML = e.key
@@ -18,7 +39,7 @@ const keysArr = document.getElementsByClassName('key')
 
 const displayLowerCaseLetters = () => {
   for (const key of keysArr) {
-    if (chosenLang === 'en') {
+    if (chosenLang === 'en' && key.innerHTML.length === 1) {
       key.innerHTML = key.innerHTML.toLowerCase()
     }
   }
@@ -44,122 +65,163 @@ const setLayoutLang = (lang) => {
 const displaySymbols = (lang) => {
   for (let k = 0; k < keysArr.length; k++) {
     if (keysArr[k].innerHTML.length === 1) {
-      if (lang[k].shift !== null) { 
-        keysArr[k].innerHTML = lang[k].shift 
+      if (lang[k].shift !== null) {
+        keysArr[k].innerHTML = lang[k].shift
       }
     }
   }
 }
 
-const onActive = (el) =>{
-  el.style.backgroundColor = 'darkgray';
-  el.style.color = 'black';
-  setTimeout(defColors,200);
+const fooForSpacebar = () => input.innerHTML += ' '
+const fooForTab = () => input.innerHTML += '   '
+const fooForEnter = () => input.innerHTML += '\n'
+
+const fooForDel = () =>{
+  if(input.innerHTML !== undefined){
+    input.innerHTML = ''
+  }
 }
 
-const defColors = () =>{
-  en.forEach((el)=> {
-    const e = en.indexOf(el);
-    if(el.shift !== null || el.key === ''){
-      keysArr[e].style.backgroundColor = '#3A424E';
-      keysArr[e].style.color = 'white';
+const fooForShiftMouseDown = () => {
+  if (chosenLang === 'ge') {
+    displaySymbols(ge)
+  } else {
+    displaySymbols(en)
+  }
+}
+
+const fooForShiftMouseUp = () => {
+  if (chosenLang === 'ge') {
+    setLayoutLang(ge)
+  } else {
+    setLayoutLang(en)
+  }
+}
+
+const fooForSuper = () => {
+  isLayoutChangeAsked = !isLayoutChangeAsked
+  if (isLayoutChangeAsked) {
+    setLayoutLang(ge)
+    chosenLang = 'ge'
+  } else {
+    setLayoutLang(en)
+    chosenLang = 'en'
+  }
+}
+
+const fooForCaps = () => {
+  isCapsOn = !isCapsOn
+  if (isCapsOn === true) {
+    keysArr[28].style.backgroundColor = 'green'
+    displayUpperCaseLetters()
+  } else {
+    keysArr[28].style.backgroundColor = '#1C232E'
+    displayLowerCaseLetters()
+  }
+}
+
+const fooForBackspace = () => {
+  if (input.innerHTML !== undefined) {
+    input.innerHTML = input.innerHTML.slice(0, input.innerHTML.length - 1)
+  }
+}
+
+const onActive = (el) => {
+  el.style.backgroundColor = 'darkgray'
+  el.style.color = 'black'
+  setTimeout(defColors, 150)
+}
+
+const defColors = () => {
+  en.forEach((el) => {
+    const e = en.indexOf(el)
+    if (el.shift !== null || el.key === '') {
+      keysArr[e].style.backgroundColor = '#3A424E'
+      keysArr[e].style.color = 'white'
     } else {
-      keysArr[e].style.backgroundColor = '#1C232E';
-      keysArr[e].style.color = 'darkgray';
+      keysArr[e].style.color = 'darkgray'
+      keysArr[e].style.backgroundColor = '#1C232E'
     }
   })
 }
 
-//  Spacebar
-keysArr[58].addEventListener('click', () => input.innerHTML += ' ')
-
-// Tab
-keysArr[14].addEventListener('click', () => input.innerHTML += '   ')
-
-// Enter
-keysArr[41].addEventListener('click', () => input.innerHTML += '\n')
-
-// L-Shift
-keysArr[42].addEventListener('mousedown', () => {
-    if (chosenLang === 'ge') {
-        displaySymbols(ge)
-    } else {
-        displaySymbols(en)
-    }
-})
-keysArr[42].addEventListener('mouseup', () => {
-    if (chosenLang === 'ge') {
-        setLayoutLang(ge)
-    } else {
-        setLayoutLang(en)
-    }
-})
-
-// R-Shift
-keysArr[54].addEventListener('mousedown', () => {
-    if (chosenLang === 'ge') {
-        displaySymbols(ge)
-    } else if (chosenLang === 'en') {
-        displaySymbols(en)
-    }
-})
-keysArr[54].addEventListener('mouseup', () => {
-    if (chosenLang === 'ge') {
-        setLayoutLang(ge)
-    } else if (chosenLang === 'en') {
-        setLayoutLang(en)
-    }
-})
-
-// Super
+keysArr[58].addEventListener('click', fooForSpacebar)
+keysArr[14].addEventListener('click', fooForTab)
+keysArr[41].addEventListener('click', fooForEnter)
+keysArr[42].addEventListener('mousedown', fooForShiftMouseDown) // L-Shift
+keysArr[42].addEventListener('mouseup', fooForShiftMouseUp)
+keysArr[54].addEventListener('mousedown', fooForShiftMouseDown) // R-Shift
+keysArr[54].addEventListener('mouseup', fooForShiftMouseUp)
+keysArr[28].addEventListener('click', fooForCaps)
+keysArr[13].addEventListener('click', fooForBackspace)
+keysArr[27].addEventListener('click', fooForDel)
 keysArr[56].addEventListener('click', () => {
-    isChangeLayoutAsked = !isChangeLayoutAsked
-    if (isChangeLayoutAsked) {
-        setLayoutLang(ge)
-        chosenLang = 'ge'
-    } else {
-        setLayoutLang(en)
-        chosenLang = 'en'
-    }
-})
-
-//  Capslock
-keysArr[28].addEventListener('click', () => {
-    isCapsOn = !isCapsOn
-    if (isCapsOn === true) {
-        keysArr[28].style.backgroundColor = 'green'
-        displayUpperCaseLetters()
-    } else {
-        keysArr[28].style.backgroundColor = '#1C232E'
-        displayLowerCaseLetters()
-    }
-})
-// Backspace
-keysArr[13].addEventListener('click', () => {
-    if (input.innerHTML !== undefined) {
-        input.innerHTML = input.innerHTML.slice(0, input.innerHTML.length - 1)
-    }
+  fooForSuper()
+  setItems()
 })
 
 // Display chars
 for (const key of keysArr) {
+  key.addEventListener('click', () => {
+    onActive(key)
     if (key.innerHTML.length === 1) {
-        key.addEventListener('click', () => input.innerHTML += key.innerHTML)
+      input.innerHTML += key.innerHTML
     }
+  })
 }
 
-document.onkeydown = function(e){ 
-  var eObj = window.event? event : e
-  if(eObj.altKey && eObj.ctrlKey){
-    onActive(keysArr[55]);
-    onActive(keysArr[57]);
-    isChangeLayoutAsked= !isChangeLayoutAsked
-    if (isChangeLayoutAsked) {
+document.onkeydown = function (e) {
+  const eObj = window.event ? event : e
+  en.forEach((e) => {
+    const index = en.indexOf(e)
+    const el = keysArr[index]
+    if (eObj.keyCode === e.keyCode) {
+      onActive(keysArr[index])
+      if (eObj.keyCode === 20) {
+        fooForCaps()
+      }
+      if (eObj.keyCode === 13) {
+        fooForEnter()
+      }
+      if (eObj.keyCode === 91) {
+        fooForSuper()
+        setItems()
+      }
+      if (eObj.keyCode === 32) {
+        fooForSpacebar()
+      }
+      if (eObj.keyCode === 9) {
+        fooForTab()
+      }
+      if(eObj.keyCode === 8){
+        fooForBackspace()
+      }
+      if (eObj.keyCode === 16) {
+        if (isShiftClicked) {
+          fooForShiftMouseUp()
+          isShiftClicked = !isShiftClicked
+        } else {
+          fooForShiftMouseDown()
+          isShiftClicked = !isShiftClicked
+        }
+      }
+      // for another keys
+      if (el.innerHTML.length === 1) {
+        input.innerHTML += el.innerHTML
+      }
+    }
+  })
+  if (eObj.altKey && eObj.ctrlKey) {
+    onActive(keysArr[55])
+    onActive(keysArr[57])
+    isLayoutChangeAsked = !isLayoutChangeAsked
+    if (isLayoutChangeAsked) {
       setLayoutLang(ge)
       chosenLang = 'ge'
     } else {
       setLayoutLang(en)
       chosenLang = 'en'
     }
+    setItems();
   }
 }
