@@ -4,8 +4,26 @@ import ge from './ge.js'
 import en from './en.js'
 
 let isCapsOn = false
-let isWinClicked = false
-let chosenLang = 'en'
+let chosenLang;
+
+document.addEventListener('DOMContentLoaded', () => {
+  if(localStorage.getItem('lang') === null ){
+    localStorage.setItem('lang',JSON.stringify(en))
+    chosenLang = 'en';
+  } else { 
+    const charsArr = JSON.parse(localStorage.getItem('lang'))
+    charsArr[15].key === 'q' ? chosenLang = 'en' : chosenLang = 'ge'
+    charsArr.forEach((e) => {
+      keysArr[charsArr.indexOf(e)].innerHTML = e.key;
+    })
+  }
+})
+
+const setItem = () => {
+  let lang;
+  chosenLang === 'en' ? lang = en : lang = ge;
+  localStorage.setItem('lang',JSON.stringify(lang));
+}
 
 closeBtn.addEventListener('click', () => help.style.display = 'none')
 helpBtn.addEventListener('click', () => help.style.display = 'flex')
@@ -105,16 +123,16 @@ keysArr[54].addEventListener('mouseup', () => {
   }
 })
 
-// Win
+// Super/Win
 keysArr[56].addEventListener('click', () => {
-  isWinClicked = !isWinClicked
-  if (isWinClicked) {
+  if (chosenLang === 'en') {
     setLayoutLang(ge)
     chosenLang = 'ge'
   } else {
     setLayoutLang(en)
     chosenLang = 'en'
   }
+  setItem();
 })
 
 //  Capslock
