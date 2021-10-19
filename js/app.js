@@ -4,15 +4,16 @@ import ge from './ge.js'
 import en from './en.js'
 
 let isCapsOn = false
-let isLayoutChangeAsked = false
-let chosenLang = 'en'
+let chosenLang;
 let isShiftClicked = false
 
 document.addEventListener('DOMContentLoaded', function(){
   if(localStorage.getItem('language') === null){
     localStorage.setItem('language',JSON.stringify(en));
+    chosenLang = 'en'
   } else {
     const lSCharsArr = JSON.parse(localStorage.getItem('language'));
+    lSCharsArr[15].key === 'q' ? chosenLang = 'en' : chosenLang = 'ge'
     lSCharsArr.forEach((e) =>{
       keysArr[lSCharsArr.indexOf(e)].innerHTML = e.key;
     })
@@ -99,8 +100,7 @@ const fooForShiftMouseUp = () => {
 }
 
 const fooForSuper = () => {
-  isLayoutChangeAsked = !isLayoutChangeAsked
-  if (isLayoutChangeAsked) {
+  if (chosenLang === 'en') {
     setLayoutLang(ge)
     chosenLang = 'ge'
   } else {
@@ -214,14 +214,7 @@ document.onkeydown = function (e) {
   if (eObj.altKey && eObj.ctrlKey) {
     onActive(keysArr[55])
     onActive(keysArr[57])
-    isLayoutChangeAsked = !isLayoutChangeAsked
-    if (isLayoutChangeAsked) {
-      setLayoutLang(ge)
-      chosenLang = 'ge'
-    } else {
-      setLayoutLang(en)
-      chosenLang = 'en'
-    }
+    fooForSuper();
     setItems();
   }
 }
